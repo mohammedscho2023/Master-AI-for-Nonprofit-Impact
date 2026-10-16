@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Fluency for NGOs — 100 ETB Course</title>
+<style>
+  :root {
+    --teal: #0d7a6f; --teal-dark: #095a52; --teal-light: #e6f4f2;
+    --amber: #f0a500; --amber-light: #fff8e6;
+    --ink: #1a2421; --muted: #5b6b66; --line: #d9e3e0;
+    --bg: #fbfdfc; --white: #ffffff; --radius: 12px;
+    --shadow: 0 4px 20px rgba(13, 122, 111, 0.08);
+    --shadow-lg: 0 12px 40px rgba(13, 122, 111, 0.14);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', -apple-system, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; color: var(--teal-dark); }
+  .logo-mark { width: 36px; height: 36px; border-radius: 9px; background: linear-gradient(135deg, var(--teal), #14a894); display: grid; place-items: center; color: #fff; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(13,122,111,0.3); }
+  .nav-links { display: flex; gap: 22px; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.92rem; font-weight: 500; }
+  .nav-links a:hover { color: var(--teal); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 8px; border: none; cursor: pointer; font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: all .2s; font-family: inherit; }
+  .btn-primary { background: var(--teal); color: #fff; box-shadow: 0 4px 14px rgba(13,122,111,0.3); }
+  .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+  .btn-ghost { background: transparent; color: var(--teal); border: 1.5px solid var(--teal); }
+  .btn-ghost:hover { background: var(--teal-light); }
+  .btn-amber { background: var(--amber); color: #fff; }
+  .btn-amber:hover { background: #d18f00; }
+  .btn-sm { padding: 8px 16px; font-size: 0.85rem; }
+  .btn-block { width: 100%; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; background: var(--teal-light); color: var(--teal-dark); padding: 6px 14px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; }
+  .hero { padding: 72px 0 80px; background: linear-gradient(170deg, #f4fbf9 0%, var(--bg) 60%); }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+  h1 { font-size: 3rem; line-height: 1.12; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 20px; }
+  h1 .accent { color: var(--teal); }
+  .hero-sub { font-size: 1.12rem; color: var(--muted); margin-bottom: 32px; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 32px; }
+  .hero-stats { display: flex; gap: 36px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .hero-stat strong { display: block; font-size: 1.6rem; color: var(--teal-dark); font-weight: 800; }
+  .hero-stat span { font-size: 0.85rem; color: var(--muted); }
+  .hero-card { background: var(--white); border-radius: 20px; padding: 28px; box-shadow: var(--shadow-lg); border: 1px solid var(--line); }
+  .hero-card h3 { font-size: 1.05rem; margin-bottom: 18px; }
+  .hc-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .hc-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.92rem; color: var(--muted); }
+  .hc-check { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--teal-light); color: var(--teal); display: grid; place-items: center; font-size: 0.75rem; font-weight: 700; }
+  .price-tag { margin-top: 22px; padding-top: 20px; border-top: 1px dashed var(--line); display: flex; align-items: baseline; gap: 10px; }
+  .price-tag .amount { font-size: 2rem; font-weight: 800; color: var(--teal-dark); }
+  section { padding: 72px 0; }
+  .section-head { text-align: center; max-width: 660px; margin: 0 auto 48px; }
+  .section-head .eyebrow { color: var(--teal); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .section-head h2 { font-size: 2.1rem; font-weight: 800; letter-spacing: -0.015em; margin-bottom: 14px; }
+  .section-head p { color: var(--muted); font-size: 1.02rem; }
+  .outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .outcome-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; transition: all .25s; }
+  .outcome-card:hover { border-color: var(--teal); box-shadow: var(--shadow); transform: translateY(-3px); }
+  .outcome-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--teal-light); display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 16px; }
+  .outcome-card h3 { font-size: 1rem; margin-bottom: 8px; }
+  .outcome-card p { font-size: 0.9rem; color: var(--muted); }
+  .curriculum { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .module { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 14px; overflow: hidden; }
+  .module.open { border-color: var(--teal); box-shadow: var(--shadow); }
+  .module-head { display: flex; align-items: center; gap: 18px; padding: 20px 24px; cursor: pointer; background: var(--white); }
+  .module-head:hover { background: #f7fbfa; }
+  .module-num { flex-shrink: 0; width: 40px; height: 40px; border-radius: 10px; background: var(--teal-light); color: var(--teal-dark); display: grid; place-items: center; font-weight: 800; font-size: 0.95rem; }
+  .module.open .module-num { background: var(--teal); color: #fff; }
+  .module-title { flex: 1; }
+  .module-title h3 { font-size: 1.08rem; margin-bottom: 3px; }
+  .module-title .meta { font-size: 0.82rem; color: var(--muted); }
+  .module-toggle { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--teal-light); color: var(--teal-dark); display: grid; place-items: center; transition: transform .3s; }
+  .module.open .module-toggle { transform: rotate(180deg); }
+  .module-body { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+  .module.open .module-body { max-height: 4000px; }
+  .module-inner { padding: 4px 24px 26px; }
+  .objectives { background: var(--amber-light); border-left: 3px solid var(--amber); border-radius: 8px; padding: 16px 20px; margin-bottom: 22px; }
+  .objectives h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: .05em; color: #8a5e00; margin-bottom: 10px; }
+  .objectives ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .objectives li { font-size: 0.9rem; color: #5c4200; padding-left: 18px; position: relative; }
+  .objectives li::before { content: '→'; position: absolute; left: 0; color: var(--amber); font-weight: 700; }
+  .res-type { margin-top: 20px; }
+  .res-type h4 { font-size: 0.95rem; display: flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--teal-dark); }
+  .res-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .res-item { background: var(--white); border: 1px solid var(--line); border-radius: 9px; padding: 14px 16px; text-decoration: none; color: inherit; transition: all .2s; }
+  .res-item:hover { border-color: var(--teal); box-shadow: 0 3px 14px rgba(13,122,111,0.1); transform: translateY(-2px); }
+  .res-item .res-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+  .res-item .res-desc { font-size: 0.82rem; color: var(--muted); }
+  .res-item .res-source { font-size: 0.72rem; color: var(--teal); font-weight: 600; margin-top: 8px; text-transform: uppercase; }
+  .pricing-wrap { display: grid; grid-template-columns: 1fr; gap: 26px; max-width: 480px; margin: 0 auto; }
+  .price-card { background: var(--white); border: 1.5px solid var(--teal); border-radius: 16px; padding: 34px; position: relative; box-shadow: var(--shadow-lg); }
+  .price-card .ribbon { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--amber); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 5px 18px; border-radius: 100px; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+  .price-card h3 { font-size: 1.15rem; margin-bottom: 6px; }
+  .price-card .sub { font-size: 0.87rem; color: var(--muted); margin-bottom: 22px; }
+  .price-amount { display: flex; align-items: baseline; gap: 6px; margin-bottom: 24px; }
+  .price-amount .num { font-size: 3rem; font-weight: 800; color: var(--teal-dark); line-height: 1; }
+  .price-amount .cur { font-size: 1.3rem; font-weight: 700; color: var(--teal-dark); }
+  .price-amount .per { font-size: 0.9rem; color: var(--muted); }
+  .features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .features li { display: flex; gap: 11px; font-size: 0.9rem; color: var(--muted); align-items: flex-start; }
+  .features li .fi { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--teal-light); color: var(--teal); display: grid; place-items: center; font-size: 0.7rem; font-weight: 700; }
+  .dashboard { display: none; }
+  .dashboard.active { display: block; }
+  .dash-header { background: linear-gradient(135deg, var(--teal-dark), var(--teal)); color: #fff; padding: 40px 0; border-radius: 0 0 24px 24px; margin-bottom: 40px; }
+  .dash-header h1 { color: #fff; font-size: 1.9rem; margin-bottom: 8px; }
+  .dash-header p { color: rgba(255,255,255,0.85); }
+  .progress-overview { background: var(--white); border-radius: 16px; padding: 28px; box-shadow: var(--shadow); margin-bottom: 32px; display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center; }
+  .progress-ring { position: relative; width: 120px; height: 120px; }
+  .progress-ring svg { transform: rotate(-90deg); }
+  .progress-ring .pct { position: absolute; inset: 0; display: grid; place-items: center; font-size: 1.5rem; font-weight: 800; color: var(--teal-dark); }
+  .progress-bar-mini { height: 8px; background: var(--teal-light); border-radius: 100px; overflow: hidden; margin-top: 14px; }
+  .progress-bar-mini div { height: 100%; background: linear-gradient(90deg, var(--teal), #14a894); border-radius: 100px; transition: width .5s; }
+  .dash-module { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 14px; overflow: hidden; }
+  .dash-module-head { display: flex; align-items: center; gap: 16px; padding: 18px 22px; cursor: pointer; }
+  .dash-module-head:hover { background: #f7fbfa; }
+  .lesson-check { flex-shrink: 0; width: 26px; height: 26px; border-radius: 7px; border: 2px solid var(--line); background: var(--white); display: grid; place-items: center; cursor: pointer; transition: all .2s; color: transparent; font-size: 0.8rem; font-weight: 700; }
+  .lesson-check:hover { border-color: var(--teal); }
+  .lesson-check.done { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .dash-module-title { flex: 1; }
+  .dash-module-title h4 { font-size: 0.98rem; }
+  .dash-module-title span { font-size: 0.8rem; color: var(--muted); }
+  .dash-lessons { max-height: 0; overflow: hidden; transition: max-height .4s; }
+  .dash-module.open .dash-lessons { max-height: 2000px; }
+  .dash-lesson { display: flex; align-items: center; gap: 14px; padding: 13px 22px 13px 64px; border-top: 1px solid var(--line); font-size: 0.9rem; }
+  .dash-lesson .ll-title { flex: 1; }
+  .dash-lesson .ll-type { font-size: 0.75rem; color: var(--muted); }
+  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(10, 30, 28, 0.55); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.active { display: flex; }
+  .modal { background: var(--white); border-radius: 18px; max-width: 460px; width: 100%; padding: 34px; box-shadow: var(--shadow-lg); position: relative; animation: modalIn .3s ease; max-height: 92vh; overflow-y: auto; }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(.97); } to { opacity: 1; transform: none; } }
+  .modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; border: none; background: var(--teal-light); color: var(--teal-dark); cursor: pointer; font-size: 1.1rem; display: grid; place-items: center; }
+  .modal-close:hover { background: var(--teal); color: #fff; }
+  .modal h2 { font-size: 1.35rem; margin-bottom: 6px; }
+  .modal .modal-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 24px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 6px; }
+  .form-group input { width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; font-family: inherit; transition: border-color .2s; background: var(--bg); }
+  .form-group input:focus { outline: none; border-color: var(--teal); background: var(--white); box-shadow: 0 0 0 3px rgba(13,122,111,0.1); }
+  .order-summary { background: var(--teal-light); border-radius: 10px; padding: 16px 18px; margin: 20px 0; }
+  .order-summary .line { display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 8px; color: var(--muted); }
+  .order-summary .line.total { border-top: 1px solid rgba(13,122,111,0.2); padding-top: 10px; margin-top: 4px; font-weight: 700; color: var(--teal-dark); font-size: 1rem; margin-bottom: 0; }
+  .secure-note { display: flex; align-items: center; gap: 8px; justify-content: center; font-size: 0.78rem; color: var(--muted); margin-top: 16px; }
+  footer { background: var(--ink); color: #b8c5c1; padding: 48px 0 28px; margin-top: 40px; }
+  .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
+  footer h4 { color: #fff; font-size: 0.95rem; margin-bottom: 14px; }
+  footer p { font-size: 0.88rem; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  footer a { color: #b8c5c1; text-decoration: none; font-size: 0.88rem; }
+  footer a:hover { color: #fff; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; font-size: 0.82rem; flex-wrap: wrap; gap: 12px; }
+  .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--ink); color: #fff; padding: 14px 24px; border-radius: 10px; font-size: 0.9rem; box-shadow: var(--shadow-lg); z-index: 300; transition: transform .35s cubic-bezier(.2,.9,.3,1.2); display: flex; align-items: center; gap: 10px; max-width: 90vw; }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast .tick { color: #4ade80; font-weight: 700; }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    h1 { font-size: 2.3rem; }
+    .outcomes-grid { grid-template-columns: 1fr 1fr; }
+    .res-list { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .nav-links a:not(.btn) { display: none; }
+    .progress-overview { grid-template-columns: 1fr; text-align: center; }
+    .progress-ring { margin: 0 auto; }
+  }
+  @media (max-width: 560px) {
+    .outcomes-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 1.9rem; }
+    .hero-stats { flex-wrap: wrap; gap: 20px; }
+    .section-head h2 { font-size: 1.6rem; }
+    .module-head { padding: 16px; gap: 12px; }
+    .module-inner { padding: 4px 16px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">
+      <div class="logo-mark">AI</div>
+      <span>AI Fluency for NGOs</span>
+    </div>
+    <nav class="nav-links">
+      <span id="phoneBadge" class="badge" style="display:none"></span>
+      <a href="#overview">Overview</a>
+      <a href="#curriculum">Curriculum</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" id="navDashboard" style="display:none">My Dashboard</a>
+      <button class="btn btn-primary btn-sm" id="navAuth">Sign In</button>
+    </nav>
+  </div>
+</header>
+
+<main id="landing">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge"><span>🇪🇹</span> Pay 100 ETB via Telebirr</div>
+        <h1 style="margin-top:20px">Master AI for <span class="accent">Nonprofit Impact</span></h1>
+        <p class="hero-sub">
+          A practical, ethics-first AI fluency course built for NGO staff. Learn to use generative AI
+          for fundraising, communications, program delivery, and M&amp;E — responsibly and effectively.
+        </p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" id="heroEnroll">Enroll Now — 100 ETB</button>
+          <a href="#curriculum" class="btn btn-ghost">View Curriculum</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><strong>5</strong><span>Core Modules</span></div>
+          <div class="hero-stat"><strong>8</strong><span>Weeks Hybrid</span></div>
+          <div class="hero-stat"><strong>60+</strong><span>Resources</span></div>
+          <div class="hero-stat"><strong>CPD</strong><span>Certified</span></div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>What you'll walk away with</h3>
+        <ul class="hc-list">
+          <li><span class="hc-check">✓</span> Practical AI literacy for real nonprofit workflows</li>
+          <li><span class="hc-check">✓</span> The 4D Framework for responsible AI collaboration</li>
+          <li><span class="hc-check">✓</span> Role-based AI applications (fundraising, M&amp;E, comms, ops)</li>
+          <li><span class="hc-check">✓</span> An AI governance checklist for your organization</li>
+          <li><span class="hc-check">✓</span> A personal AI implementation plan for your role</li>
+          <li><span class="hc-check">✓</span> Certificate of completion + CPD credits</li>
+        </ul>
+        <div class="price-tag">
+          <span class="cur">ETB</span>
+          <span class="amount">100</span>
+          <span style="font-size:0.85rem;color:var(--muted)">one-time</span>
+        </div>
+        <button class="btn btn-amber btn-block" style="margin-top:18px" id="cardEnroll">Enroll with Telebirr</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="overview">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Learning Outcomes</div>
+        <h2>What You'll Be Able to Do</h2>
+      </div>
+      <div class="outcomes-grid">
+        <div class="outcome-card"><div class="outcome-icon">🧠</div><h3>Explain AI Concepts</h3><p>Understand AI and evaluate opportunities within NGO environments.</p></div>
+        <div class="outcome-card"><div class="outcome-icon">🔧</div><h3>Apply the 4D Framework</h3><p>Use Delegation, Description, Discernment, and Diligence on real tasks.</p></div>
+        <div class="outcome-card"><div class="outcome-icon">✍️</div><h3>Write Effective Prompts</h3><p>Critically evaluate AI outputs for accuracy, bias, and mission alignment.</p></div>
+        <div class="outcome-card"><div class="outcome-icon">⚙️</div><h3>Integrate AI into Workflows</h3><p>Apply tools to research, communications, data analysis, and reporting.</p></div>
+        <div class="outcome-card"><div class="outcome-icon">🛡️</div><h3>Implement Responsible AI</h3><p>Apply ethical, privacy, and governance best practices.</p></div>
+        <div class="outcome-card"><div class="outcome-icon">🗺️</div><h3>Build an AI Roadmap</h3><p>Develop a roadmap aligned with your organization's mission and values.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="curriculum" id="curriculum">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Curriculum</div>
+        <h2>Five Modules, Eight Weeks</h2>
+        <p>Click any module to explore its objectives and curated external resources.</p>
+      </div>
+      <div id="curriculumList"></div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Pricing</div>
+        <h2>One Simple Price</h2>
+        <p>Full access to the entire course. Lifetime enrollment.</p>
+      </div>
+      <div class="pricing-wrap">
+        <div class="price-card">
+          <div class="ribbon">🇪🇹 Pay with Telebirr</div>
+          <h3>Complete Course Access</h3>
+          <p class="sub">One-time payment · Lifetime access</p>
+          <div class="price-amount">
+            <span class="cur">ETB</span>
+            <span class="num">100</span>
+            <span class="per">one-time</span>
+          </div>
+          <ul class="features">
+            <li><span class="fi">✓</span> All 5 core modules</li>
+            <li><span class="fi">✓</span> 8-week hybrid schedule</li>
+            <li><span class="fi">✓</span> Live virtual workshops</li>
+            <li><span class="fi">✓</span> 60+ curated resources</li>
+            <li><span class="fi">✓</span> Certificate of completion</li>
+            <li><span class="fi">✓</span> Lifetime access</li>
+          </ul>
+          <button class="btn btn-primary btn-block" id="pricingEnroll">Enroll Now — 100 ETB</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="dashboard" id="dashboard">
+  <div class="dash-header">
+    <div class="container">
+      <h1>Welcome back 👋</h1>
+      <p id="dashPhone">Continue your AI fluency journey.</p>
+    </div>
+  </div>
+  <div class="container" style="padding-bottom:60px">
+    <div class="progress-overview">
+      <div class="progress-ring">
+        <svg width="120" height="120">
+          <circle cx="60" cy="60" r="52" stroke="#e6f4f2" stroke-width="10" fill="none"/>
+          <circle cx="60" cy="60" r="52" stroke="#0d7a6f" stroke-width="10" fill="none"
+                  stroke-linecap="round" id="progressCircle"
+                  stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+        </svg>
+        <div class="pct" id="progressPct">0%</div>
+      </div>
+      <div class="progress-info">
+        <h3>Your Overall Progress</h3>
+        <p id="progressText">You haven't started yet. Open Module 1 to begin!</p>
+        <div class="progress-bar-mini"><div id="progressBar" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div id="dashboardModules"></div>
+    <div style="text-align:center;margin-top:28px">
+      <button class="btn btn-ghost" id="backToLanding">← Back to Course Home</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal" style="max-width:420px">
+    <button class="modal-close" id="loginClose">✕</button>
+    <div id="loginStepPhone">
+      <h2>Sign in with your phone</h2>
+      <p class="modal-sub">Enter your Ethiopian phone number to receive a 6-digit code via SMS.</p>
+      <form id="phoneForm">
+        <div class="form-group">
+          <label for="phoneInput">Phone Number</label>
+          <div style="display:flex;gap:8px">
+            <span style="display:flex;align-items:center;padding:0 12px;background:var(--teal-light);color:var(--teal-dark);font-weight:700;border-radius:8px;font-size:0.9rem">+251</span>
+            <input type="tel" id="phoneInput" placeholder="912345678" maxlength="10" required style="flex:1">
+          </div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:6px">Format: 09XXXXXXXX or 07XXXXXXXX</div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="sendOtpBtn">Send Code</button>
+      </form>
+    </div>
+    <div id="loginStepOtp" style="display:none">
+      <h2>Enter your code</h2>
+      <p class="modal-sub">We sent a 6-digit code to <strong id="otpPhoneDisplay"></strong>.</p>
+      <form id="otpForm">
+        <div class="form-group">
+          <label for="otpInput">Verification Code</label>
+          <input type="text" id="otpInput" placeholder="123456" maxlength="6" inputmode="numeric" required
+                 style="letter-spacing:8px;text-align:center;font-size:1.4rem;font-weight:700">
+        </div>
+        <div id="devCodeHint" style="display:none;background:#fff8e6;border-left:3px solid var(--amber);padding:10px 14px;border-radius:8px;font-size:0.82rem;color:#8a5e00;margin-bottom:14px">
+          🧪 <strong>Dev mode:</strong> Your code is <strong id="devCodeValue"></strong>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="verifyOtpBtn">Verify &amp; Sign In</button>
+        <button type="button" class="btn btn-ghost btn-block" id="backToPhoneBtn" style="margin-top:10px">← Use a different number</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <h2>Enroll with Telebirr</h2>
+    <p class="modal-sub">You'll be redirected to Ethio Telecom's secure payment page.</p>
+    <form id="checkoutForm">
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="checkoutPhone" readonly style="background:var(--teal-light);font-weight:600">
+      </div>
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" placeholder="Abebe Kebede" required>
+      </div>
+      <div class="form-group">
+        <label for="org">Organization (optional)</label>
+        <input type="text" id="org" placeholder="Your NGO">
+      </div>
+      <div class="order-summary">
+        <div class="line"><span>Course Enrollment</span><span>100.00 ETB</span></div>
+        <div class="line"><span>Processing fee</span><span>0.00 ETB</span></div>
+        <div class="line total"><span>Total</span><span>100.00 ETB</span></div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="payBtn">Pay 100 ETB with Telebirr</button>
+      <div class="secure-note">🔒 Secured by Ethio Telecom Telebirr</div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span class="tick">✓</span> <span id="toastMsg">Done</span></div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:#fff;margin-bottom:14px">
+          <div class="logo-mark">AI</div>
+          <span>AI Fluency for NGOs</span>
+        </div>
+        <p>Practical, ethics-first AI training built for nonprofit teams worldwide.</p>
+      </div>
+      <div>
+        <h4>Course</h4>
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#curriculum">Curriculum</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#" id="footerDashboard">My Dashboard</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://data.org/resources/ai-for-social-change-resource-library/" target="_blank" rel="noopener">data.org AI Library</a></li>
+          <li><a href="https://nethope.org" target="_blank" rel="noopener">NetHope</a></li>
+          <li><a href="https://academy.claude.com" target="_blank" rel="noopener">Anthropic AI Fluency</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AI Fluency for NGOs. All rights reserved.</span>
+      <span>Made for mission-driven organizations · Addis Ababa</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   CONFIG
+   ============================================================ */
+const API_BASE = window.location.origin.includes('localhost')
+  ? 'http://localhost:3000'
+  : 'https://your-api.com'; // ← change for production
+const USER_KEY = 'ai_ngo_user';
+const PENDING_ORDER_KEY = 'telebirr_pending_order';
+
+/* ============================================================
+   COURSE DATA
+   ============================================================ */
+const COURSE_DATA = [
+  { num:1, title:"AI Foundations for Nonprofits", weeks:"Weeks 1–2", duration:"3 hrs",
+    objectives:["Define AI, machine learning, generative AI, and agentic AI in plain language","Understand how AI is used in the nonprofit sector","Identify capabilities and limitations of current AI systems","Articulate values guiding AI use"],
+    resources: {
+      video:[{title:"Welcome to AI Fluency for Nonprofits",desc:"Introductory video from Anthropic's AI Fluency course.",source:"Claude Academy",url:"https://academy.claude.com"}],
+      article:[{title:"AI for Social Change: Resource Library",desc:"Free multilingual library built for nonprofits.",source:"data.org",url:"https://data.org/resources/ai-for-social-change-resource-library/"},{title:"Unlocking AI for Nonprofits",desc:"NetHope's free CPD-certified course series.",source:"NetHope",url:"https://nethope.org"}],
+      book:[{title:"AI for Good",desc:"By Lavista Ferres & Weeks — real-world ML applications.",source:"Book",url:"#"}],
+      blog:[{title:"Harnessing AI ethically in nonprofits",desc:"Globethics practical roadmap.",source:"Globethics",url:"https://media.globethics.net"}]
+    }},
+  { num:2, title:"The 4D Framework — Description & Discernment", weeks:"Weeks 2–3", duration:"3.5 hrs",
+    objectives:["Apply the Description-Discernment loop","Practice Product, Process, Performance Description","Apply Discernment to evaluate AI outputs"],
+    resources:{
+      video:[{title:"AI for Nonprofits: Prompting 101",desc:"Foundational LLM prompting for nonprofit staff.",source:"ITU AI for Good",url:"https://aiforgood.itu.int"}],
+      article:[{title:"Gemini Prompt Library for Nonprofits",desc:"Nonprofit-specific prompt examples.",source:"Google",url:"https://support.google.com"},{title:"AI for Nonprofits: Helpful Prompts",desc:"Bloomerang guide with ready-to-use prompts.",source:"Bloomerang",url:"https://bloomerang.com"}],
+      book:[{title:"AI for Nonprofits",desc:"By Heyman & Contee.",source:"Book",url:"#"}],
+      blog:[{title:"Beyond ChatGPT: AI for Donor Relationships",desc:"AFP on AI + donor segmentation.",source:"AFP Global",url:"https://afpglobal.org"}]
+    }},
+  { num:3, title:"Practical Applications — Role-Based AI Workflows", weeks:"Weeks 4–5", duration:"4 hrs",
+    objectives:["Apply generative AI to specific NGO functions","Automate routine workflows","Utilise AI analytics for decision-making"],
+    resources:{
+      video:[{title:"Smart Fundraising for Nonprofits Using AI",desc:"SCORE's three-move AI fundraising framework.",source:"SCORE",url:"https://www.score.org"}],
+      article:[{title:"Guide to AI Solutions for Humanitarian Nonprofits",desc:"NetHope's comprehensive guide.",source:"NetHope",url:"https://nethope.org"},{title:"AI for Social Good Playbook",desc:"Strategy and terminology guide.",source:"Apparo",url:"https://apparo.org"}],
+      book:[{title:"AI for Social Good",desc:"By Rahul Dodhia.",source:"Book",url:"#"}],
+      blog:[{title:"How Nonprofits Are Using AI",desc:"Real examples and case studies.",source:"Momentive",url:"https://momentivesoftware.com"}]
+    }},
+  { num:4, title:"Responsible AI — Ethics, Privacy & Governance", weeks:"Weeks 5–6", duration:"4 hrs",
+    objectives:["Understand data shared with AI","Evaluate platform policies","Apply humanitarian principles","Mitigate bias and privacy risks"],
+    resources:{
+      video:[{title:"AI Ethics Webinar Series",desc:"NetHope, USAID, MIT D-Lab series.",source:"NetHope",url:"https://nethope.org"},{title:"Introduction to Responsible AI",desc:"NTEN course on fairness and ethics.",source:"NTEN",url:"https://www.nten.org"}],
+      article:[{title:"Nine Principles of Responsible AI for Nonprofits",desc:"Vera Solutions blog.",source:"Vera Solutions",url:"https://verasolutions.org"},{title:"How to Develop Organizational Policies for Gen AI",desc:"data.org guide.",source:"data.org",url:"https://data.org/guides/how-to-develop-organizational-policies-for-using-gen-ai/"}],
+      book:[{title:"A Giant Leap",desc:"By Robert Wachter.",source:"Book",url:"#"}],
+      blog:[{title:"From Promise to Practice",desc:"IRC lessons on responsible AI in humanitarian contexts.",source:"IRC",url:"https://www.rescue.org"}]
+    }},
+  { num:5, title:"The Delegation-Diligence Loop & Capstone", weeks:"Weeks 7–8", duration:"5 hrs",
+    objectives:["Apply the Delegation-Diligence loop","Make human-vs-AI decisions","Design a practical AI implementation plan"],
+    resources:{
+      video:[{title:"Agentic AI for Social Good",desc:"Nesta event recording.",source:"Nesta",url:"https://www.nesta.org.uk"}],
+      article:[{title:"AI Governance for Nonprofits",desc:"Dataro guide on Candid's governance framework.",source:"Dataro",url:"https://dataro.io"}],
+      book:[{title:"Essential",desc:"On distributed teams and generative AI.",source:"Book",url:"#"}],
+      blog:[{title:"Nine Principles of Responsible AI",desc:"Vera Solutions governance guide.",source:"Vera Solutions",url:"https://verasolutions.org"}]
+    }}
+];
+
+/* ============================================================
+   RENDER CURRICULUM
+   ============================================================ */
+function renderCurriculum() {
+  document.getElementById('curriculumList').innerHTML = COURSE_DATA.map((m, idx) => {
+    const typeBlocks = [
+      { key: 'video', label: 'Videos', emoji: '🎥' },
+      { key: 'article', label: 'Articles & Guides', emoji: '📖' },
+      { key: 'book', label: 'Books', emoji: '📚' },
+      { key: 'blog', label: 'Blogs', emoji: '📝' }
+    ].filter(t => m.resources[t.key]?.length);
+
+    const resHtml = typeBlocks.map(t => `
+      <div class="res-type">
+        <h4><span>${t.emoji}</span> ${t.label}</h4>
+        <div class="res-list">
+          ${m.resources[t.key].map(r => `
+            <a class="res-item" href="${r.url}" target="_blank" rel="noopener">
+              <div class="res-title">${r.title} ↗</div>
+              <div class="res-desc">${r.desc}</div>
+              <div class="res-source">${r.source}</div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="module" data-idx="${idx}">
+        <div class="module-head" onclick="toggleModule(${idx})">
+          <div class="module-num">${m.num}</div>
+          <div class="module-title">
+            <h3>Module ${m.num}: ${m.title}</h3>
+            <div class="meta">${m.weeks} · ${m.duration}</div>
+          </div>
+          <div class="module-toggle">⌄</div>
+        </div>
+        <div class="module-body"><div class="module-inner">
+          <div class="objectives">
+            <h4>Learning Objectives</h4>
+            <ul>${m.objectives.map(o => `<li>${o}</li>`).join('')}</ul>
+          </div>
+          ${resHtml}
+        </div></div>
+      </div>`;
+  }).join('');
+}
+function toggleModule(idx) {
+  document.querySelector(`.module[data-idx="${idx}"]`).classList.toggle('open');
+}
+
+/* ============================================================
+   SESSION MANAGEMENT
+   ============================================================ */
+let accessToken = null;
+let refreshTimer = null;
+
+function getUser() { try { return JSON.parse(localStorage.getItem(USER_KEY) || 'null'); } catch { return null; } }
+function saveUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+function clearSession() {
+  accessToken = null;
+  localStorage.removeItem(USER_KEY);
+  clearTimeout(refreshTimer);
+  fetch(`${API_BASE}/api/auth/logout`, { method: 'POST', credentials: 'include' }).catch(() => {});
+}
+
+function setAccessToken(token, expiresInSeconds) {
+  accessToken = token;
+  clearTimeout(refreshTimer);
+  refreshTimer = setTimeout(refreshAccessToken, (expiresInSeconds - 60) * 1000);
+}
+
+async function refreshAccessToken() {
+  try {
+    const res = await fetch(`${API_BASE}/api/auth/refresh`, {
+      method: 'POST', credentials: 'include',
+    });
+    const data = await res.json();
+    if (data.success) {
+      setAccessToken(data.accessToken, 15 * 60);
+      if (data.user) saveUser(data.user);
+      updateAuthUI();
+      return true;
+    }
+  } catch { /* fall through */ }
+  accessToken = null;
+  localStorage.removeItem(USER_KEY);
+  updateAuthUI();
+  return false;
+}
+
+async function authFetch(url, options = {}) {
+  const headers = Object.assign({ 'Content-Type': 'application/json' }, options.headers || {});
+  if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
+  let res = await fetch(url, { ...options, headers, credentials: 'include' });
+  if (res.status === 401 && accessToken) {
+    const refreshed = await refreshAccessToken();
+    if (refreshed) {
+      headers.Authorization = `Bearer ${accessToken}`;
+      res = await fetch(url, { ...options, headers, credentials: 'include' });
+    }
+  }
+  return res;
+}
+
+/* ============================================================
+   LOGIN FLOW
+   ============================================================ */
+const loginModal = document.getElementById('loginModal');
+const checkoutModal = document.getElementById('checkoutModal');
+let pendingAction = null;
+
+function openLogin(after) {
+  pendingAction = after || null;
+  document.getElementById('loginStepPhone').style.display = 'block';
+  document.getElementById('loginStepOtp').style.display = 'none';
+  document.getElementById('phoneForm').reset();
+  document.getElementById('otpForm').reset();
+  document.getElementById('devCodeHint').style.display = 'none';
+  loginModal.classList.add('active');
+}
+function closeLogin() {
+  loginModal.classList.remove('active');
+  pendingAction = null;
+}
+
+document.getElementById('loginClose').addEventListener('click', closeLogin);
+loginModal.addEventListener('click', e => { if (e.target === loginModal) closeLogin(); });
+
+document.getElementById('phoneForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('sendOtpBtn');
+  btn.textContent = 'Sending…'; btn.disabled = true;
+  try {
+    const res = await fetch(`${API_BASE}/api/auth/send-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone: document.getElementById('phoneInput').value.trim() }),
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+
+    document.getElementById('otpPhoneDisplay').textContent = data.phone;
+    document.getElementById('loginStepPhone').style.display = 'none';
+    document.getElementById('loginStepOtp').style.display = 'block';
+    document.getElementById('otpInput').value = '';
+
+    if (data.devCode) {
+      document.getElementById('devCodeHint').style.display = 'block';
+      document.getElementById('devCodeValue').textContent = data.devCode;
+    }
+    showToast('Verification code sent');
+  } catch (err) {
+    showToast(err.message);
+  } finally {
+    btn.textContent = 'Send Code'; btn.disabled = false;
+  }
+});
+
+document.getElementById('otpForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('verifyOtpBtn');
+  btn.textContent = 'Verifying…'; btn.disabled = true;
+  try {
+    const res = await fetch(`${API_BASE}/api/auth/verify-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        phone: document.getElementById('phoneInput').value.trim(),
+        code: document.getElementById('otpInput').value.trim(),
+      }),
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+
+    setAccessToken(data.accessToken, 15 * 60);
+    saveUser(data.user);
+    updateAuthUI();
+    closeLogin();
+    showToast('Signed in successfully');
+
+    if (pendingAction === 'checkout') openCheckout();
+    else if (pendingAction === 'dashboard') showDashboard();
+    pendingAction = null;
+  } catch (err) {
+    showToast(err.message);
+  } finally {
+    btn.textContent = 'Verify & Sign In'; btn.disabled = false;
+  }
+});
+
+document.getElementById('backToPhoneBtn').addEventListener('click', () => {
+  document.getElementById('loginStepOtp').style.display = 'none';
+  document.getElementById('loginStepPhone').style.display = 'block';
+});
+
+/* ============================================================
+   AUTH UI STATE
+   ============================================================ */
+function updateAuthUI() {
+  const user = getUser();
+  const loggedIn = !!user;
+
+  document.getElementById('navDashboard').style.display = loggedIn ? 'inline' : 'none';
+
+  const authBtn = document.getElementById('navAuth');
+  if (loggedIn) {
+    authBtn.textContent = 'Log Out';
+    authBtn.onclick = () => { clearSession(); updateAuthUI(); showLanding(); showToast('Signed out'); };
+  } else {
+    authBtn.textContent = 'Sign In';
+    authBtn.onclick = () => openLogin('dashboard');
+  }
+
+  const badge = document.getElementById('phoneBadge');
+  if (loggedIn) {
+    badge.textContent = '📱 ' + user.phone;
+    badge.style.display = 'inline-flex';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+/* ============================================================
+   CHECKOUT
+   ============================================================ */
+function openCheckout() {
+  const user = getUser();
+  if (!user) return openLogin('checkout');
+  if (user.enrolled) return showToast('You are already enrolled!');
+  document.getElementById('checkoutPhone').value = user.fullPhone;
+  document.getElementById('fullName').value = user.name || '';
+  document.getElementById('org').value = user.organization || '';
+  checkoutModal.classList.add('active');
+}
+function closeCheckout() { checkoutModal.classList.remove('active'); }
+
+document.getElementById('modalClose').addEventListener('click', closeCheckout);
+checkoutModal.addEventListener('click', e => { if (e.target === checkoutModal) closeCheckout(); });
+
+['navAuth'].forEach(() => {}); // no-op placeholder
+['heroEnroll', 'cardEnroll', 'pricingEnroll'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('click', openCheckout);
+});
+
+document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('payBtn');
+  const original = btn.textContent;
+  btn.textContent = 'Creating order…'; btn.disabled = true;
+
+  try {
+    const res = await authFetch(`${API_BASE}/api/telebirr/create-order`, {
+      method: 'POST',
+      body: JSON.stringify({
+        name: document.getElementById('fullName').value,
+        organization: document.getElementById('org').value,
+      }),
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+
+    localStorage.setItem(PENDING_ORDER_KEY, data.merchOrderId);
+    window.location.href = data.checkoutUrl;
+  } catch (err) {
+    showToast(err.message);
+    btn.textContent = original; btn.disabled = false;
+  }
+});
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+function renderDashboard() {
+  const user = getUser();
+  if (!user) return;
+
+  document.getElementById('dashPhone').textContent = `${user.phone} · ${user.name || 'Learner'}`;
+
+  const wrap = document.getElementById('dashboardModules');
+  wrap.innerHTML = COURSE_DATA.map((m, idx) => {
+    const lessons = [
+      { title: 'Watch: Module overview video', type: 'Video' },
+      { title: 'Read: Curated articles & guides', type: 'Reading' },
+      { title: 'Practice: Hands-on exercise', type: 'Exercise' },
+      { title: 'Live: Virtual workshop', type: 'Live' },
+      { title: 'Quiz: Knowledge check', type: 'Quiz' }
+    ];
+    return `
+      <div class="dash-module" data-module="${idx}">
+        <div class="dash-module-head" onclick="toggleDashModule(${idx})">
+          <div class="lesson-check" data-check="m${idx}" onclick="event.stopPropagation();toggleCheck(this)">✓</div>
+          <div class="dash-module-title">
+            <h4>Module ${m.num}: ${m.title}</h4>
+            <span>${m.weeks} · ${m.duration}</span>
+          </div>
+          <div class="module-toggle">⌄</div>
+        </div>
+        <div class="dash-lessons">
+          ${lessons.map((l, li) => `
+            <div class="dash-lesson">
+              <div class="lesson-check" data-check="m${idx}l${li}" onclick="toggleCheck(this)">✓</div>
+              <div class="ll-title">${l.title}</div>
+              <div class="ll-type">${l.type}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>`;
+  }).join('');
+  restoreProgress();
+}
+
+function toggleDashModule(idx) {
+  document.querySelector(`.dash-module[data-module="${idx}"]`).classList.toggle('open');
+}
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  saveProgress();
+  updateProgressUI();
+}
+
+const STORAGE_KEY = 'ai_ngo_progress';
+function saveProgress() {
+  const checks = {};
+  document.querySelectorAll('.lesson-check').forEach(el => {
+    if (el.dataset.check) checks[el.dataset.check] = el.classList.contains('done');
+  });
+  const user = getUser();
+  if (user) localStorage.setItem(`${STORAGE_KEY}_${user.phone}`, JSON.stringify(checks));
+}
+function restoreProgress() {
+  const user = getUser();
+  if (!user) return;
+  const saved = JSON.parse(localStorage.getItem(`${STORAGE_KEY}_${user.phone}`) || '{}');
+  document.querySelectorAll('.lesson-check').forEach(el => {
+    if (el.dataset.check && saved[el.dataset.check]) el.classList.add('done');
+  });
+  updateProgressUI();
+}
+function updateProgressUI() {
+  const all = document.querySelectorAll('.lesson-check[data-check]');
+  const done = document.querySelectorAll('.lesson-check[data-check].done');
+  const pct = all.length ? Math.round((done.length / all.length) * 100) : 0;
+
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressCircle').style.strokeDashoffset = 326.7 - (pct / 100) * 326.7;
+
+  const txt = document.getElementById('progressText');
+  if (pct === 0) txt.textContent = "You haven't started yet. Open Module 1 to begin!";
+  else if (pct < 30) txt.textContent = "Great start! Keep going through the modules.";
+  else if (pct < 70) txt.textContent = "You're making solid progress. Over halfway there!";
+  else if (pct < 100) txt.textContent = "Almost there! Finish the capstone to complete the course.";
+  else txt.textContent = "🎉 Congratulations! You've completed the entire course.";
+}
+
+function showDashboard() {
+  if (!getUser()) return openLogin('dashboard');
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('dashboard').classList.add('active');
+  window.scrollTo(0, 0);
+  renderDashboard();
+}
+function showLanding() {
+  document.getElementById('landing').style.display = 'block';
+  document.getElementById('dashboard').classList.remove('active');
+  window.scrollTo(0, 0);
+}
+
+document.getElementById('navDashboard').addEventListener('click', e => { e.preventDefault(); showDashboard(); });
+document.getElementById('backToLanding').addEventListener('click', showLanding);
+document.getElementById('footerDashboard').addEventListener('click', e => { e.preventDefault(); showDashboard(); });
+
+/* ============================================================
+   PAYMENT RETURN
+   ============================================================ */
+async function checkPaymentReturn() {
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('payment');
+  const orderId = params.get('order');
+  if (!status) return;
+  window.history.replaceState({}, '', window.location.pathname);
+
+  if (status === 'success' && orderId && getUser()) {
+    try {
+      const res = await authFetch(`${API_BASE}/api/telebirr/verify/${orderId}`);
+      const data = await res.json();
+      if (data.success && data.status === 'PAID') {
+        // Refresh user
+        const meRes = await authFetch(`${API_BASE}/api/auth/me`);
+        const me = await meRes.json();
+        if (me.success) saveUser(me.user);
+        updateAuthUI();
+        renderDashboard();
+        showDashboard();
+        showToast('Payment confirmed! Welcome to the course 🎉');
+      } else {
+        showToast('Payment still processing. Try again in a moment.');
+      }
+    } catch {
+      showToast('Could not verify payment. Order: ' + orderId);
+    }
+  } else if (status === 'pending') {
+    showToast("Payment pending. You'll receive a confirmation shortly.");
+  }
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+let toastTimer;
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3400);
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+renderCurriculum();
+
+(async function init() {
+  // Try restoring session silently
+  await refreshAccessToken();
+  updateAuthUI();
+  await checkPaymentReturn();
+
+  // Auto-open first module
+  setTimeout(() => {
+    const first = document.querySelector('.module[data-idx="0"]');
+    if (first) first.classList.add('open');
+  }, 300);
+})();
+</script>
+</body>
+</html>
